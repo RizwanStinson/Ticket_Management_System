@@ -6,6 +6,6 @@ export const generateToken = (userId: string, role: string): string => {
   });
 };
 
-export const verifyToken = (token: string): any => {
+export const verifyToken = (token: string) => {
   return jwt.verify(token, process.env.JWT_SECRET as string);
 };
