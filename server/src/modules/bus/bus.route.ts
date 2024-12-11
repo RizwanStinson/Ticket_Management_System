@@ -5,9 +5,7 @@ import { authenticate, authorizeAdmin } from "../../shared/middlewares/auth.midd
 const router = express.Router();
 
 router.get("/", authenticate, getAllBuses);
-router.post("/", authenticate, authorizeAdmin, addBus);
-router.put("/:id", authenticate, authorizeAdmin, updateBus);
-router.delete("/:id", authenticate, authorizeAdmin, deleteBus);
+
 
 export default router;
 
