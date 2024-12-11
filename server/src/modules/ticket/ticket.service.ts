@@ -51,16 +51,8 @@ export const purchaseTicketService = async (
     throw new Error(`Only ${ticket.availableSeats} ticket(s) are available`);
   }
 
-  ticket.availableSeats -= quantity; // Reduce seats by the requested quantity
-  await ticket.save(); // Save changes to the database
+  ticket.availableSeats -= quantity; 
+  await ticket.save(); 
 
-  return ticket; // Return the updated ticket
-
-  // if (!ticket || ticket.availableSeats === 0) {
-  //   throw new Error("Ticket not available");
-  // }
-
-  // ticket.availableSeats -= 1;
-  // await ticket.save();
-  // return ticket;
+  return ticket; 
 };
