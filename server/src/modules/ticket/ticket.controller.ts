@@ -87,21 +87,28 @@ export const getAvailableTickets = async (req: Request, res: Response) => {
   }
 };
 
-export const purchaseTicket = async (req: Request, res: Response) => {
+export const purchaseTicket = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { ticketId } = req.body;
-    const ticket = await purchaseTicketService(ticketId);
+    const { ticketId, quantity } = req.body;
+
+    if (!quantity || quantity <= 0) {
+      res.status(400).json({ message: "Invalid quantity" });
+      return;
+    }
+
+    const ticket = await purchaseTicketService(ticketId, quantity);
     if (ticket) {
-      res.json({ message: "Ticket purchased successfully", ticket });
+      res.json({
+        message: `${quantity} ticket(s) purchased successfully`,
+        ticket,
+      });
     } else {
       res.status(404).json({ message: "Ticket not found or not available" });
     }
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "Failed to purchase ticket",
-        error: (error as Error).message,
-      });
+    res.status(400).json({
+      message: "Failed to purchase ticket",
+      error: (error as Error).message,
+    });
   }
 };

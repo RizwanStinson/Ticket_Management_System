@@ -1,9 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt.util";
 
+ export interface DecodedToken {
+  userId: string;
+  role: 'admin' | 'user';
+  iat: number;
+  exp: number;
+}
+
 
 export const authenticate = (
-  req: Request,
+  req: Request & { user?: DecodedToken },
   res: Response,
   next: NextFunction
 ): void => {
@@ -15,8 +22,8 @@ export const authenticate = (
   }
 
   try {
-    const decoded = verifyToken(token);
-    (req as any).user = decoded;
+    const decoded = verifyToken(token) as DecodedToken;
+    req.user = decoded;
     next(); 
   } catch (error) {
     res.status(401).json({ message: "Invalid token" });
@@ -25,13 +32,13 @@ export const authenticate = (
 };
 
 export const authorizeAdmin = (
-  req: Request,
+  req: Request & { user?: DecodedToken },
   res: Response,
   next: NextFunction
 ): void => {
-  if ((req as any).user?.role !== "admin") {
+  if (req.user?.role !== "admin") {
     res.status(403).json({ message: "Admin access required" });
-    return; 
+    return;
   }
   next();
 };

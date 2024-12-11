@@ -38,14 +38,29 @@ export const getAvailableTicketsService = async (): Promise<ITicket[]> => {
 };
 
 export const purchaseTicketService = async (
-  ticketId: string
+  ticketId: string,
+  quantity: number
 ): Promise<ITicket | null> => {
   const ticket = await Ticket.findById(ticketId);
-  if (!ticket || ticket.availableSeats === 0) {
-    throw new Error("Ticket not available");
+
+  if (!ticket) {
+    throw new Error("Ticket not found");
   }
 
-  ticket.availableSeats -= 1;
-  await ticket.save();
-  return ticket;
+  if (ticket.availableSeats < quantity) {
+    throw new Error(`Only ${ticket.availableSeats} ticket(s) are available`);
+  }
+
+  ticket.availableSeats -= quantity; // Reduce seats by the requested quantity
+  await ticket.save(); // Save changes to the database
+
+  return ticket; // Return the updated ticket
+
+  // if (!ticket || ticket.availableSeats === 0) {
+  //   throw new Error("Ticket not available");
+  // }
+
+  // ticket.availableSeats -= 1;
+  // await ticket.save();
+  // return ticket;
 };
