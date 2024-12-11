@@ -42,5 +42,6 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const logout = (req: Request, res: Response) => {
+  // For logout, In Frontend, token will be cleared from local storage
   res.json({ message: "Logout successful" });
 };
