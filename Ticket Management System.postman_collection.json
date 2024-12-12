@@ -1,0 +1,1596 @@
+{
+	"info": {
+		"_postman_id": "0b1224bd-be13-45e4-a513-37cd21ae5f94",
+		"name": "Ticket Management System",
+		"description": "## **📚 Ticket Management System — Collection Overview**\n\nThe **Ticket Management System** is a web-based application that enables users to view available buses and their schedules, as well as purchase tickets for specific buses and times. Admins have the ability to manage buses, tickets, and user authentication. The system supports CRUD operations on buses and tickets while ensuring role-based access control.\n\n### **Key Features**\n\n- **User Authentication**: Users can register, log in, and log out. JWT (JSON Web Token) is used for secure authentication.\n    \n- **Role-based Access Control**: Admins have elevated privileges to manage buses and tickets.\n    \n- **Bus Management**: Admins can create, update, and delete bus records.\n    \n- **Ticket Management**: Users can view available tickets, while admins can add, update, and delete tickets.\n    \n- **Ticket Purchase**: Users can purchase tickets using the system.\n    \n- **Secure API**: All endpoints (except login and register) are secured using JWT tokens.\n    \n\n### **Authentication**\n\n- **Login** and **Register** endpoints allow users to get a JWT token.\n    \n- The JWT is required for most requests and should be sent as a **Bearer Token** in the request header.\n    \n\n### **Entities**\n\n- **Users**: Have roles such as `user` or `admin`.\n    \n- **Buses**: Represent transport vehicles, with attributes like `name` and `capacity`.\n    \n- **Tickets**: Represent bookable tickets linked to buses.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37648594"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "/auth/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"Rizwan\",\n  \"email\": \"Rizwan@gmail.com\",\n  \"password\": \"SecurePass123\",\n  \"role\": \"user\"\n}"
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/auth/register",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "- **Endpoint**: [/auth/register](https://ticket-management-system-rizwan.onrender.com/auth/register)\n    \n- **Method**: `POST`\n    \n- **Description**: This endpoint allows a user to register for the system."
+					},
+					"response": [
+						{
+							"name": "/auth/register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"Rizwan\",\n  \"email\": \"Rizwan@gmail.com\",\n  \"password\": \"SecurePass123\",\n  \"role\": \"user\"\n}"
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/auth/register",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:11:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0cee00ddbba47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-ylUbkqeq4UFdX0w608nEh1F/MFY\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "e2ecb970-ac27-4b04"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\",\n    \"userId\": \"675ab6c8065eb93f1e7f90b0\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"Rizwan@gmail.com\",\n  \"password\": \"SecurePass123\"\n}"
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/auth/login",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "- **Endpoint**: `/auth/login`\n    \n- **Method**: `POST`\n    \n- **Description**: This endpoint logs a user in and returns a JWT token."
+					},
+					"response": [
+						{
+							"name": "/auth/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"Rizwan@gmail.com\",\n  \"password\": \"SecurePass123\"\n}"
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/auth/login",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:17:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "241"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0cf7b4183ca47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11e-zWIjeni/J0PI7HyaBz3ueqtQAAg\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "6b356b28-2e13-4983"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYjZjODA2NWViOTNmMWU3ZjkwYjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMzk5ODY3NywiZXhwIjoxNzM0MDg1MDc3fQ.i4APDjkwIt62SI3E_dfb6BfQxCDC1agQ-TvylldPAWc\",\n    \"userId\": \"675ab6c8065eb93f1e7f90b0\",\n    \"role\": \"user\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/auth/logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYjZjODA2NWViOTNmMWU3ZjkwYjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMzk5ODgzMywiZXhwIjoxNzM0MDg1MjMzfQ.iKahruv57T53q1qVhx9fkO7kp6Vs4XB_z4kNzPYoATI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/auth/logout",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						},
+						"description": "- **Endpoint**: `/auth/logout`\n    \n- **Method**: `POST`\n    \n- **Authentication**: **Bearer Token** (JWT Required)\n    \n- **Description**: Logs out the current user."
+					},
+					"response": [
+						{
+							"name": "/auth/logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/auth/logout",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:20:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0cfc218a2fa47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-vYmtThEV0qgPmOaoi5WLoJuDA80\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "1d82054a-314d-439d"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logout successful\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The **Authentication** module handles user registration, login, and logout."
+		},
+		{
+			"name": "buses",
+			"item": [
+				{
+					"name": "/buses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYjZjODA2NWViOTNmMWU3ZjkwYjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMzk5OTExOSwiZXhwIjoxNzM0MDg1NTE5fQ.b9YuX_fXFj_219pbNwQO4LDI80aNHM6kTbA_K0nLsYs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/buses",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"buses"
+							]
+						},
+						"description": "- **Endpoint**: `/buses`\n    \n- **Method**: `GET`\n    \n- **Authentication**: **Bearer Token** (JWT Required)\n    \n- **Description**: Returns a list of all buses."
+					},
+					"response": [
+						{
+							"name": "/buses",
+							"originalRequest": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYjZjODA2NWViOTNmMWU3ZjkwYjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMzk5OTExOSwiZXhwIjoxNzM0MDg1NTE5fQ.b9YuX_fXFj_219pbNwQO4LDI80aNHM6kTbA_K0nLsYs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/buses",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"buses"
+									]
+								},
+								"description": "- **Endpoint**: `/buses`\n    \n- **Method**: `GET`\n    \n- **Authentication**: **Bearer Token** (JWT Required)\n    \n- **Description**: Returns a list of all buses."
+							},
+							"status": "200 OK",
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "[{\n  \"_id\": \"64f9fc0368559b3f1f688d5a\",\n  \"name\": \"Green Line\",\n  \"capacity\": 50\n}]"
+						}
+					]
+				},
+				{
+					"name": "/admin/bus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYmI4NDA2NWViOTNmMWU3ZjkwYjYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM5OTk1MDMsImV4cCI6MTczNDA4NTkwM30.LhlBo08nRm5cO4H5_1mStYi2d-KEZxVXZyM2iGyjFDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Green Line\",\r\n  \"capacity\": 30\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/admin/bus",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"admin",
+								"bus"
+							]
+						},
+						"description": "- **Endpoint**: `/admin/bus`\n    \n- **Method**: `POST`\n    \n- **Authentication**: **Bearer Token** (Admin role required)\n    \n- **Description**: Allows the admin to create a new bus."
+					},
+					"response": [
+						{
+							"name": "/admin/bus",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Green Line\",\r\n  \"capacity\": 30\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/admin/bus",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"admin",
+										"bus"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:33:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d0deeab72a47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"77-6G+zoYVSwLlboim7KTUcsx6UiyA\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "e3ea593a-fdad-47e6"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Bus added successfully\",\n    \"bus\": {\n        \"name\": \"Green Line\",\n        \"capacity\": 30,\n        \"_id\": \"675abbe3065eb93f1e7f90b9\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/admin/bus/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYmI4NDA2NWViOTNmMWU3ZjkwYjYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM5OTk1MDMsImV4cCI6MTczNDA4NTkwM30.LhlBo08nRm5cO4H5_1mStYi2d-KEZxVXZyM2iGyjFDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Green Line\",\r\n  \"capacity\": 15\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/admin/bus/675abbe3065eb93f1e7f90b9",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"admin",
+								"bus",
+								"675abbe3065eb93f1e7f90b9"
+							]
+						},
+						"description": "- **Endpoint**: `/admin/bus/:id`\n    \n- **Method**: `PUT`\n    \n- **Authentication**: **Bearer Token** (Admin role required)\n    \n- **Description**: Updates the details of a specific bus."
+					},
+					"response": [
+						{
+							"name": "/admin/bus/:id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Green Line\",\r\n  \"capacity\": 15\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/admin/bus/675abbe3065eb93f1e7f90b9",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"admin",
+										"bus",
+										"675abbe3065eb93f1e7f90b9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:34:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d1025b849a47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"79-fI4JDR04husSqmmnOP1hyJi+CEI\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "70217e4e-066b-4843"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Bus updated successfully\",\n    \"bus\": {\n        \"_id\": \"675abbe3065eb93f1e7f90b9\",\n        \"name\": \"Green Line\",\n        \"capacity\": 15,\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/admin/bus/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYmI4NDA2NWViOTNmMWU3ZjkwYjYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM5OTk1MDMsImV4cCI6MTczNDA4NTkwM30.LhlBo08nRm5cO4H5_1mStYi2d-KEZxVXZyM2iGyjFDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Green Line\",\r\n  \"capacity\": 15\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/admin/bus/675abe4b065eb93f1e7f90c3",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"admin",
+								"bus",
+								"675abe4b065eb93f1e7f90c3"
+							]
+						},
+						"description": "- **Endpoint**: `/admin/bus/:id`\n    \n- **Method**: `DELETE`\n    \n- **Authentication**: **Bearer Token** (Admin role required)\n    \n- **Description**: Deletes a bus with the specified ID."
+					},
+					"response": [
+						{
+							"name": "/admin/bus/:id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Green Line\",\r\n  \"capacity\": 15\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/admin/bus/675abe4b065eb93f1e7f90c3",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"admin",
+										"bus",
+										"675abe4b065eb93f1e7f90c3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 11:34:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d6780cd8fa475-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-MtwaeVkBrOZtg3u1o4DcSkOvwec\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "c365af20-9ed1-4c2c"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Bus deleted successfully\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The **Buses** module allows administrators to manage the buses."
+		},
+		{
+			"name": "tickets",
+			"item": [
+				{
+					"name": "/tickets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYjZjODA2NWViOTNmMWU3ZjkwYjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMzk5OTExOSwiZXhwIjoxNzM0MDg1NTE5fQ.b9YuX_fXFj_219pbNwQO4LDI80aNHM6kTbA_K0nLsYs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/tickets",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tickets"
+							]
+						},
+						"description": "- **Endpoint**: `/tickets`\n    \n- **Method**: `GET`\n    \n- **Authentication**: **Bearer Token** (JWT Required)\n    \n- **Description**: Fetches all tickets available in the system."
+					},
+					"response": [
+						{
+							"name": "/tickets",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/tickets",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:49:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "139"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d25484fc5a47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ca-cG2BsABo4vCyrPzdlm0VTyhqv0c\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "cce293a6-2861-4fa7"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"675abf6b065eb93f1e7f90c9\",\n        \"bus\": {\n            \"_id\": \"675abe4b065eb93f1e7f90c3\",\n            \"name\": \"Green Line\",\n            \"capacity\": 30,\n            \"__v\": 0\n        },\n        \"price\": 120,\n        \"departureTime\": \"2024-10-20T03:00:00.000Z\",\n        \"availableSeats\": 27,\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "/admin/ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYmI4NDA2NWViOTNmMWU3ZjkwYjYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM5OTk1MDMsImV4cCI6MTczNDA4NTkwM30.LhlBo08nRm5cO4H5_1mStYi2d-KEZxVXZyM2iGyjFDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"busId\": \"675abe4b065eb93f1e7f90c3\",\r\n    \"price\": 120,\r\n    \"departureTime\": \"2024-10-20T03:00:00Z\",\r\n    \"availableSeats\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/admin/ticket",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"admin",
+								"ticket"
+							]
+						},
+						"description": "- **Endpoint**: `/admin/ticket`\n    \n- **Method**: `POST`\n    \n- **Authentication**: **Bearer Token** (Admin role required)\n    \n- **Description**: Allows the admin to add a new ticket for a specific bus."
+					},
+					"response": [
+						{
+							"name": "/admin/ticket",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"busId\": \"675abe4b065eb93f1e7f90c3\",\r\n    \"price\": 120,\r\n    \"departureTime\": \"2024-10-20T03:00:00Z\",\r\n    \"availableSeats\": 30\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/admin/ticket",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"admin",
+										"ticket"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:43:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "146"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d1dc51eb9a47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c7-7PK6u0/DKBsMtz4c3hrpkgY8QqE\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "7cd8016b-d3be-45ac"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket added successfully\",\n    \"ticket\": {\n        \"bus\": \"675abe4b065eb93f1e7f90c3\",\n        \"price\": 120,\n        \"departureTime\": \"2024-10-20T03:00:00.000Z\",\n        \"availableSeats\": 30,\n        \"_id\": \"675abe6c065eb93f1e7f90c5\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/admin/ticket/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYmI4NDA2NWViOTNmMWU3ZjkwYjYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM5OTk1MDMsImV4cCI6MTczNDA4NTkwM30.LhlBo08nRm5cO4H5_1mStYi2d-KEZxVXZyM2iGyjFDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 120,\r\n    \"departureTime\": \"2024-10-20T03:00:00Z\",\r\n    \"availableSeats\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/admin/ticket/675abe6c065eb93f1e7f90c5",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"admin",
+								"ticket",
+								"675abe6c065eb93f1e7f90c5"
+							]
+						},
+						"description": "- **Endpoint**: `/admin/ticket/:id`\n    \n- **Method**: `PUT`\n    \n- **Authentication**: **Bearer Token** (Admin role required)\n    \n- **Description**: Updates an existing ticket."
+					},
+					"response": [
+						{
+							"name": "/admin/ticket/:id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\": 120,\r\n    \"departureTime\": \"2024-10-20T03:00:00Z\",\r\n    \"availableSeats\": 25\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/admin/ticket/675abe6c065eb93f1e7f90c5",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"admin",
+										"ticket",
+										"675abe6c065eb93f1e7f90c5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:46:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "147"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d20da9a9ca47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c9-mBOw+R3K2yWWYwHNBWLV+4KTjLw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "73e9a350-ff73-45a9"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket updated successfully\",\n    \"ticket\": {\n        \"_id\": \"675abe6c065eb93f1e7f90c5\",\n        \"bus\": \"675abe4b065eb93f1e7f90c3\",\n        \"price\": 120,\n        \"departureTime\": \"2024-10-20T03:00:00.000Z\",\n        \"availableSeats\": 25,\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/admin/ticket/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYmI4NDA2NWViOTNmMWU3ZjkwYjYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM5OTk1MDMsImV4cCI6MTczNDA4NTkwM30.LhlBo08nRm5cO4H5_1mStYi2d-KEZxVXZyM2iGyjFDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/admin/ticket/675abe6c065eb93f1e7f90c5",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"admin",
+								"ticket",
+								"675abe6c065eb93f1e7f90c5"
+							]
+						},
+						"description": "- **Endpoint**: `/admin/ticket/:id`\n    \n- **Method**: `DELETE`\n    \n- **Authentication**: **Bearer Token** (Admin role required)\n    \n- **Description**: Deletes an existing ticket."
+					},
+					"response": [
+						{
+							"name": "/admin/ticket/:id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/admin/ticket/675abe6c065eb93f1e7f90c5",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"admin",
+										"ticket",
+										"675abe6c065eb93f1e7f90c5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:46:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d21b96f9fa47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-HfEjdkew3ZZL3bO+Dms3KU+NOmY\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "fa7a8cb4-c32c-4082"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket deleted successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/tickets/purchase",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzVhYjZjODA2NWViOTNmMWU3ZjkwYjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMzk5OTExOSwiZXhwIjoxNzM0MDg1NTE5fQ.b9YuX_fXFj_219pbNwQO4LDI80aNHM6kTbA_K0nLsYs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ticketId\": \"675abf6b065eb93f1e7f90c9\",\r\n   \"quantity\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "ticket-management-system-rizwan.onrender.com/tickets/purchase",
+							"host": [
+								"ticket-management-system-rizwan",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tickets",
+								"purchase"
+							]
+						},
+						"description": "- **Endpoint**: `/tickets/purchase`\n    \n- **Method**: `POST`\n    \n- **Authentication**: **Bearer Token** (JWT Required)\n    \n- **Description**: Purchases a ticket for the logged-in user."
+					},
+					"response": [
+						{
+							"name": "/admin/ticket/:id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"ticketId\": \"675abf6b065eb93f1e7f90c9\",\r\n   \"quantity\": 3\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "ticket-management-system-rizwan.onrender.com/tickets/purchase",
+									"host": [
+										"ticket-management-system-rizwan",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"tickets",
+										"purchase"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Dec 2024 10:48:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "152"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "CF-Ray",
+									"value": "8f0d24e79c3ca47b-DAC"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d0-schtIU7mtFt7oqb6jUOjzF1VE1A\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "rndr-id",
+									"value": "a24c16cd-c71e-46be"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "x-render-origin-server",
+									"value": "Render"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"3 ticket(s) purchased successfully\",\n    \"ticket\": {\n        \"_id\": \"675abf6b065eb93f1e7f90c9\",\n        \"bus\": \"675abe4b065eb93f1e7f90c3\",\n        \"price\": 120,\n        \"departureTime\": \"2024-10-20T03:00:00.000Z\",\n        \"availableSeats\": 27,\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "The **Tickets** module handles the management of tickets for buses."
+		}
+	]
+}

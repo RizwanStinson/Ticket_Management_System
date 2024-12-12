@@ -17,16 +17,13 @@ The Ticket Management System is a robust, scalable backend solution for managing
 ## 🛠 Technologies Used
 
 - **Backend**: Node.js, Express.js
+-**Design Pattern**: Modular
 - **Database**: MongoDB with Mongoose ODM
 - **Authentication**: JSON Web Tokens (JWT)
 - **Language**: TypeScript
 - **API Testing**: Postman
 
-## 📋 Prerequisites
 
-- Node.js (v14 or later)
-- MongoDB
-- npm or yarn
 
 ## 🚀 Getting Started
 
@@ -35,9 +32,31 @@ The Ticket Management System is a robust, scalable backend solution for managing
    ```bash
    git clone https://github.com/RizwanStinson/ticket-management-system.git
    cd ticket-management-system
+   npm install
+   npm run start
 
 
+### ER Diagram
+![Dashboard](/er_diagram/Ticket_Management_System_ERDiagram.png)
 
-npm init -y
-npm install express mongoose bcrypt jsonwebtoken dotenv
-npm install --save-dev typescript @types/express @types/mongoose @types/bcrypt @types/jsonwebtoken @types/node ts-node nodemon
+## Relations:
+
+The Bus entity has a one-to-many relationship with the Ticket entity. This means a single bus can have multiple associated tickets.
+The User entity has a one-to-many relationship with the Ticket entity. This means a single user can purchase multiple tickets.
+
+## Primary Keys (PK):
+
+The User entity has a primary key of UserID.
+The Bus entity has a primary key of BusID.
+The Ticket entity has a primary key of TicketID.
+
+## Foreign Keys (FK):
+
+The Ticket entity has a foreign key of BusID, which references the primary key of the Bus entity.
+The Ticket entity also has a foreign key of UserID, which references the primary key of the User entity.
+
+
+### Postman Collection
+
+Visit the postman collection remotely at [https://documenter.getpostman.com/view/37648594/2sAYHxmNpC](Postman Collection). and locally at 
+![Postman Collection](/Ticket%20Management%20System.postman_collection.json)
