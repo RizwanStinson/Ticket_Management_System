@@ -35,3 +35,9 @@ The Ticket Management System is a robust, scalable backend solution for managing
    ```bash
    git clone https://github.com/RizwanStinson/ticket-management-system.git
    cd ticket-management-system
+
+
+
+npm init -y
+npm install express mongoose bcrypt jsonwebtoken dotenv
+npm install --save-dev typescript @types/express @types/mongoose @types/bcrypt @types/jsonwebtoken @types/node ts-node nodemon
