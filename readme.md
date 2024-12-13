@@ -22,6 +22,7 @@ The Ticket Management System is a robust, scalable backend solution for managing
 - **Authentication**: JSON Web Tokens (JWT)
 - **Language**: TypeScript
 - **API Testing**: Postman
+-**Password Hashing**: Bcrypt
 
 
 
@@ -30,17 +31,15 @@ The Ticket Management System is a robust, scalable backend solution for managing
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/RizwanStinson/ticket-management-system.git
+   git clone https://github.com/RizwanStinson/Ticket_Management_System
    cd ticket-management-system
    npm install
    npm run start
 
 ### Postman Collection
 
-Visit the published postman collection remotely at ![Postman Collection](https://documenter.getpostman.com/view/37648594/2sAYHxmNpC) and locally at ![Postman Collection](/Ticket%20Management%20System.postman_collection.json)
+Visit the published postman collection remotely at ![https://documenter.getpostman.com/view/37648594/2sAYHxmNpC] 
+and locally at ![Postman Collection](/Ticket%20Management%20System.postman_collection.json)
 
 ### ER Diagram
 ![ER_Diagram](/er_diagram/ER_Diagram.png)
-
-
-
