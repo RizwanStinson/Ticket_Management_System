@@ -36,10 +36,10 @@ The Ticket Management System is a robust, scalable backend solution for managing
    npm install
    npm run start
 
-### Postman Collection
+## 📬 Postman Collection
 
 Visit the published postman collection remotely at (https://documenter.getpostman.com/view/37648594/2sAYHxmNpC) 
 and locally at ![Postman Collection](/Ticket%20Management%20System.postman_collection.json)
 
-### ER Diagram
+## 📊 ER Diagram
 ![ER_Diagram](/er_diagram/ER_Diagram.png)
