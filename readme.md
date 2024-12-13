@@ -32,10 +32,19 @@ The Ticket Management System is a robust, scalable backend solution for managing
 
    ```bash
    git clone https://github.com/RizwanStinson/Ticket_Management_System
-   cd ticket-management-system
+   cd Ticket-Management-System
    npm install
-   npm run start
+   npm run dev
 
+2. **Environment Variables Setup**
+   ```bash
+   MONGODB_URI=your_mongodb_atlas_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   PORT=your_desired_port_number
+
+To run the project locally, you need to set up the following environment variables in a .env file at the root of your project. 
+
+ 
 ## 🟠 Postman Collection
 
 Visit the published postman collection remotely at (https://documenter.getpostman.com/view/37648594/2sAYHxmNpC) 
